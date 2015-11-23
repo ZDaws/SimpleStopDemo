@@ -26,7 +26,7 @@ class SWViewController: UIViewController, UITableViewDataSource {
         let cell = lapsTableView.dequeueReusableCellWithIdentifier("prototype1", forIndexPath: indexPath)
         cell.textLabel?.text = laps[indexPath.row]
         cell.textLabel?.textColor = UIColor.whiteColor()
-        
+        cell.backgroundColor = UIColor.clearColor()
         return cell
         
     }
