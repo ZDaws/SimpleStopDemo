@@ -60,7 +60,7 @@ class SWViewController: UIViewController, UITableViewDataSource {
     }
     @IBAction func lap(sender: UIButton) {
         if(displayTimeLabel.text != "00:00:00"){
-            laps.append(displayTimeLabel.text!)
+            laps.insert(displayTimeLabel.text!, atIndex: 0)
             lapsTableView.reloadData()
         }
         
