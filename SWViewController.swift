@@ -15,7 +15,7 @@ class SWViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         lapsTableView.dataSource = self
         lapsTableView.backgroundColor = UIColor(red: 0, green: 116, blue: 254, alpha: 0)
-        lapsTableView.setEditing(true, animated: true)
+        //lapsTableView.setEditing(true, animated: true)
     }
     
     
@@ -27,15 +27,16 @@ class SWViewController: UIViewController, UITableViewDataSource {
         cell.textLabel?.text = laps[indexPath.row]
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.backgroundColor = UIColor.clearColor()
+        cell.textLabel?.textAlignment = NSTextAlignment.Center
         return cell
         
     }
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    /*func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             laps.removeAtIndex(indexPath.row)
             lapsTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
-    }
+    }*/
     
     
     
