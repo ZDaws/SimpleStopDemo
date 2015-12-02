@@ -15,9 +15,7 @@ class SWViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         lapsTableView.dataSource = self
         lapsTableView.backgroundColor = UIColor(red: 0, green: 116, blue: 254, alpha: 0)
-        //lapsTableView.setEditing(true, animated: true)
     }
-    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return laps.count
@@ -31,12 +29,15 @@ class SWViewController: UIViewController, UITableViewDataSource {
         return cell
         
     }
-    /*func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             laps.removeAtIndex(indexPath.row)
             lapsTableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
-    }*/
+    }
     
     
     
