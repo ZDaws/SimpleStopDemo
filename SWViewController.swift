@@ -53,27 +53,34 @@ class SWViewController: UIViewController, UITableViewDataSource {
         timer.invalidate()
         _ = sender.titleForState(UIControlState.Normal)!
         if(sender.currentTitle == "Reset"){
+            
+            
+            func reset(){
+                sender.setTitle("Stop", forState: UIControlState.Normal)
+                self.displayTimeLabel.text = "00:00:00"
+                self.laps = []
+                self.lapsTableView.reloadData()
+            }
+            
+            
             let title = "Are you sure you want to Reset?"
             let message = "All laps will be deleted"
-            let okText = "YES"
-            let cancelText = "NO"
+            let okText = "Yes"
+            let cancelText = "No"
             
             let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
             
-            let okButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Destructive, handler: nil)
-            alert.addAction(okButton)
             let cancelButton = UIAlertAction(title: cancelText, style: UIAlertActionStyle.Cancel, handler: nil)
             alert.addAction(cancelButton)
+            let okButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Destructive, handler: nil)
+            alert.addAction(okButton)
             
             presentViewController(alert, animated: true, completion: nil)
             
-            sender.setTitle("Stop", forState: UIControlState.Normal)
-            displayTimeLabel.text = "00:00:00"
-            laps = []
-            lapsTableView.reloadData()
         }
         else{sender.setTitle("Reset", forState: UIControlState.Normal)}
     }
+    
     @IBAction func lap(sender: UIButton) {
         if(displayTimeLabel.text != "00:00:00"){
             laps.insert(displayTimeLabel.text!, atIndex: 0)
@@ -81,6 +88,7 @@ class SWViewController: UIViewController, UITableViewDataSource {
         }
         
     }
+    
     @IBOutlet weak var lapsTableView: UITableView!
     
     
