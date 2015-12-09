@@ -53,26 +53,25 @@ class SWViewController: UIViewController, UITableViewDataSource {
         timer.invalidate()
         _ = sender.titleForState(UIControlState.Normal)!
         if(sender.currentTitle == "Reset"){
-            
-            
-            func reset(){
-                sender.setTitle("Stop", forState: UIControlState.Normal)
-                self.displayTimeLabel.text = "00:00:00"
-                self.laps = []
-                self.lapsTableView.reloadData()
-            }
-            
+            sender.setTitle("Stop", forState: UIControlState.Normal)
             
             let title = "Are you sure you want to Reset?"
             let message = "All laps will be deleted"
-            let okText = "Yes"
-            let cancelText = "No"
+            let okText = "Yep"
+            let cancelText = "Nope"
+            
+            let reset = { (action:UIAlertAction!) -> Void in
+                self.displayTimeLabel.text = "00:00:00"
+                self.laps = []
+                self.lapsTableView.reloadData()
+                
+            }
             
             let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
             
             let cancelButton = UIAlertAction(title: cancelText, style: UIAlertActionStyle.Cancel, handler: nil)
             alert.addAction(cancelButton)
-            let okButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Destructive, handler: nil)
+            let okButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Destructive, handler: reset) //calls the reset function on line 63 when pressed
             alert.addAction(okButton)
             
             presentViewController(alert, animated: true, completion: nil)
