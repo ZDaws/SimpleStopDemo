@@ -44,45 +44,50 @@ class SWViewController: UIViewController, UITableViewDataSource {
     @IBAction func start(sender: UIButton) {
         if (displayTimeLabel.text == "00:00:00") {
             let aSelector : Selector = "updateTime"
+            //makes a new timer where the time updates every .01 seconds
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
             startTime = NSDate.timeIntervalSinceReferenceDate()
+        }
+        else {
+            /*let aSelector : Selector = "updateTime"
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)*/
+            
         }
     }
     
     @IBAction func stop(sender: UIButton) {
-        timer.invalidate()
+        timer.invalidate() //stops the timer
         _ = sender.titleForState(UIControlState.Normal)!
-        if(sender.currentTitle == "Reset"){
-            sender.setTitle("Stop", forState: UIControlState.Normal)
-            
-            let title = "Are you sure you want to Reset?"
-            let message = "All laps will be deleted"
+        if(sender.currentTitle == "Reset"){ //if the button title is "Reset", then show the alert when pressed
+            sender.setTitle("Stop", forState: UIControlState.Normal) //sets title of the button back to "Stop"
+            let title = "Are you sure you want to reset?"
+            let message = "All laps will be deleted!"
             let okText = "Yep"
             let cancelText = "Nope"
             
+            //resets the master clock and deletes all laps
             let reset = { (action:UIAlertAction!) -> Void in
                 self.displayTimeLabel.text = "00:00:00"
                 self.laps = []
                 self.lapsTableView.reloadData()
-                
             }
             
-            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert) //new alert
             
-            let cancelButton = UIAlertAction(title: cancelText, style: UIAlertActionStyle.Cancel, handler: nil)
+            let cancelButton = UIAlertAction(title: cancelText, style: UIAlertActionStyle.Cancel, handler: nil) //cancels the reset
             alert.addAction(cancelButton)
-            let okButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Destructive, handler: reset) //calls the reset function on line 63 when pressed
+            let okButton = UIAlertAction(title: okText, style: UIAlertActionStyle.Destructive, handler: reset) //calls the reset function
             alert.addAction(okButton)
             
-            presentViewController(alert, animated: true, completion: nil)
+            presentViewController(alert, animated: true, completion: nil) //present the alert when the "Reset" button is pressed
             
         }
-        else{sender.setTitle("Reset", forState: UIControlState.Normal)}
+        else{sender.setTitle("Reset", forState: UIControlState.Normal)} //if the button title is "Stop", then change the title to reset
     }
     
     @IBAction func lap(sender: UIButton) {
         if(displayTimeLabel.text != "00:00:00"){
-            laps.insert(displayTimeLabel.text!, atIndex: 0)
+            laps.insert(displayTimeLabel.text!, atIndex: 0) //record the displayTimeLabel (the time) and insert it into the "laps" array
             lapsTableView.reloadData()
         }
         
