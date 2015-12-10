@@ -1,5 +1,6 @@
 
 import UIKit
+import Foundation
 
 class SWViewController: UIViewController, UITableViewDataSource {
     
@@ -8,6 +9,12 @@ class SWViewController: UIViewController, UITableViewDataSource {
     var laps:[String] = []
     
     var startTime = NSTimeInterval()
+    
+    var endTime = String()
+    
+    var DateFormatter = NSDateFormatter()
+    
+    var newStartTime = NSDate()
     
     var timer:NSTimer = NSTimer()
     
@@ -49,9 +56,12 @@ class SWViewController: UIViewController, UITableViewDataSource {
             startTime = NSDate.timeIntervalSinceReferenceDate()
         }
         else {
-            /*let aSelector : Selector = "updateTime"
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)*/
-            
+            let aSelector : Selector = "updateTime"
+            //starts timer from current time
+            timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
+            endTime = displayTimeLabel.text!;
+            newStartTime = DateFormatter.dateFromString(endTime)! //take the displayLabel from the timer and turn it into a NSDate() object
+            startTime = NSDate.timeIntervalSinceDate(newStartTime) //use the new date to start the timer at "endTime"
         }
     }
     
