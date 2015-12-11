@@ -1,6 +1,5 @@
 
 import UIKit
-import Foundation
 
 class SWViewController: UIViewController, UITableViewDataSource {
     
@@ -10,7 +9,7 @@ class SWViewController: UIViewController, UITableViewDataSource {
     
     var startTime = NSTimeInterval()
     
-    var endTime = String()
+    var saveTime: String = "00.00.00"
     
     var DateFormatter = NSDateFormatter()
     
@@ -59,10 +58,10 @@ class SWViewController: UIViewController, UITableViewDataSource {
             let aSelector : Selector = "updateTime"
             //starts timer from current time
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
-            endTime = displayTimeLabel.text!;
-            newStartTime = DateFormatter.dateFromString(endTime)! //take the displayLabel from the timer and turn it into a NSDate() object
-            startTime = NSDate.timeIntervalSinceDate(newStartTime) //use the new date to start the timer at "endTime"
+            newStartTime = DateFormatter.dateFromString(saveTime)! //take the displayLabel from the timer and turn it into a NSDate() object
+            startTime = newStartTime.timeIntervalSinceDate(newStartTime) //use the new date to start the timer at "endTime"
         }
+        
     }
     
     @IBAction func stop(sender: UIButton) {
@@ -92,7 +91,10 @@ class SWViewController: UIViewController, UITableViewDataSource {
             presentViewController(alert, animated: true, completion: nil) //present the alert when the "Reset" button is pressed
             
         }
-        else{sender.setTitle("Reset", forState: UIControlState.Normal)} //if the button title is "Stop", then change the title to reset
+        else{
+            sender.setTitle("Reset", forState: UIControlState.Normal)
+            self.saveTime = displayTimeLabel.text!
+        } //if the button title is "Stop", then change the title to reset and saveTime is the time it was stopped at.
     }
     
     @IBAction func lap(sender: UIButton) {
