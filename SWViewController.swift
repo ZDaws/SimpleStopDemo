@@ -13,6 +13,10 @@ class SWViewController: UIViewController, UITableViewDataSource {
     
     var DateFormatter = NSDateFormatter()
     
+        //DateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        DateFormatter.dateFormat = "mm.ss.SS"
+        let x =  DateFormatter.stringFromDate(NSDate())
+    
     var newStartTime = NSDate()
     
     var timer:NSTimer = NSTimer()
