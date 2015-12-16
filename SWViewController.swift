@@ -11,11 +11,13 @@ class SWViewController: UIViewController, UITableViewDataSource {
     
     var saveTime: String = "00.00.00"
     
-    var DateFormatter = NSDateFormatter()
-    
-        //DateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+    func timerFormat(time: String) -> NSDate{
+        let DateFormatter = NSDateFormatter()
+        DateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        DateFormatter.timeZone = NSTimeZone (name: "Central")
         DateFormatter.dateFormat = "mm.ss.SS"
-        let x =  DateFormatter.stringFromDate(NSDate())
+        return DateFormatter.dateFromString(time)!
+    }
     
     var newStartTime = NSDate()
     
@@ -64,7 +66,7 @@ class SWViewController: UIViewController, UITableViewDataSource {
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: bSelector, userInfo: nil, repeats: true)
             if (self.saveTime != NSNull()) {
                 //take the displayLabel from the timer and turn it into a NSDate() object
-                newStartTime = DateFormatter.dateFromString(saveTime)!
+                newStartTime = timerFormat(saveTime)
                 startTime = newStartTime.timeIntervalSinceDate(newStartTime) //use the new date to start the timer at "endTime"
             }
         }
