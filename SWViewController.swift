@@ -9,13 +9,13 @@ class SWViewController: UIViewController, UITableViewDataSource {
     
     var startTime = NSTimeInterval()
     
-    var saveTime: String = "00.00.00"
+    var saveTime: String = "00:00:00"
     
     func timerFormat(time: String) -> NSDate{
         let DateFormatter = NSDateFormatter()
         DateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         DateFormatter.timeZone = NSTimeZone (name: "Central")
-        DateFormatter.dateFormat = "mm.ss.SS"
+        DateFormatter.dateFormat = "mm:ss:SS"
         return DateFormatter.dateFromString(time)!
     }
     
