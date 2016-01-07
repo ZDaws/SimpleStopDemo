@@ -68,16 +68,16 @@ class SWViewController: UIViewController, UITableViewDataSource {
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
             startTime = NSDate.timeIntervalSinceReferenceDate()
         }
-        else {
-            let bSelector : Selector = "updateTime"
-            //starts timer from current time
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: bSelector, userInfo: nil, repeats: true)
-            if (self.saveTime != NSNull()) {
-                //take the displayLabel from the timer and turn it into a NSDate() object
-                newStartTime = toDate(saveTime)
-                startTime = newStartTime.timeIntervalSinceDate(newStartTime) //use the new date to start the timer at "endTime"
-            }
-        }
+//        else {
+//            let bSelector : Selector = "updateTime"
+//            //starts timer from current time
+//            timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: bSelector, userInfo: nil, repeats: true)
+//            if (self.saveTime != NSNull()) {
+//                //take the displayLabel from the timer and turn it into a NSDate() object
+//                newStartTime = toDate(saveTime)
+//                startTime = newStartTime.timeIntervalSinceDate(newStartTime) //use the new date to start the timer at "endTime"
+//            }
+//        }
         
     }
     
